@@ -1,7 +1,31 @@
 # COS791-Assignment1
 In this assignment we had to build an optimizer capable of optimizing an edge detection pipeline.
 
-## Pipeline Framework
+## Table of Contents:
+- [How to run the program](#how-to-run-the-program)
+- [Pipeline Framework Components](#pipeline-framework-components)
+- [Our Approach](#our-approach)
+
+## How to run the program
+1. First download all the files or simply clone the repository.
+2. Make sure the folder structure is the same as this repository's folder structure.
+3. (*)Open the Jupiter Notebook and replace the file path with your file path such that you can load the original image files.
+4. Once the images are succesfully loaded, simply run each cell until you reach the section *'Run the program'*.
+5. If all cells were successfully executed then run the final cell.
+6. The program will then prompt you the following options:
+   - '1) General Pipeline' -> Select option 1) if you want to run the GA such that it build a general pipeline based on one image and then applied to all other images.
+   - '2) Individual Pipeline' -> Select option 2) if you want the GA to run and build a specific pipeline for each image.
+   - '3) Exit the program'
+7. Done.
+   
+**Note: The Jupiter Notebook contains file paths that were used specifically when I worked on this assignment. Make sure to replace them with your respective file paths otherwise the notebook will not run.*
+
+*Note: The program will continue prompting you each time the GA converges and will only terminate when you select option 3.*
+
+*Note: The program also contains file paths to save the output images. You also need to replace these with your chosen file paths.*
+   
+
+## Pipeline Framework Components
 All images appear to have the same size and has colour. We now need to build a pipeline framework which we can use to apply all the components of edge detection to a single image.
 
 Our proposed framework will consist of the following integral components (steps):
