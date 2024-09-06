@@ -6,6 +6,13 @@ In this assignment we had to build an optimizer capable of optimizing an edge de
 - [Pipeline Framework Components](#pipeline-framework-components)
 - [Our Approach](#our-approach)
 
+<p float="left" align="middle">
+  <img src="https://github.com/JsteReubsSoftware/COS791-Assignment1/blob/main/Image_Files/original/Img6.png" width="200" />
+  <img src="https://github.com/JsteReubsSoftware/COS791-Assignment1/blob/main/Image_Files/gray_scale/Img6_gray.png" width="200" /> 
+  <img src="https://github.com/JsteReubsSoftware/COS791-Assignment1/blob/main/Image_Files/indv_imgs/Img6_indv_pipeline.png" width="200" />
+  <img src="https://github.com/JsteReubsSoftware/COS791-Assignment1/blob/main/Image_Files/canny/Img6_Canny.png" width="200" />
+</p>
+
 ## How to run the program
 1. First download all the files or simply clone the repository.
 2. Make sure the folder structure is the same as this repository's folder structure.
