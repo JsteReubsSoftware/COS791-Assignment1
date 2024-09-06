@@ -1,1 +1,114 @@
 # COS791-Assignment1
+In this assignment we had to build an optimizer capable of optimizing an edge detection pipeline.
+
+## Pipeline Framework
+All images appear to have the same size and has colour. We now need to build a pipeline framework which we can use to apply all the components of edge detection to a single image.
+
+Our proposed framework will consist of the following integral components (steps):
+
+1. Noise Reduction:
+- Objective: To diminish the influence of noise, which may obstruct the process of edge detection.
+- Options: Gaussian blurring, median filtering, and bilateral filtering.
+
+2. Gradient Calculation:
+- Objective: To ascertain the rate of variation in pixel intensity across both horizontal and vertical orientations.
+- Options: Sobel, Prewitt, or Laplacian operators are frequently utilized.
+
+3. Edge Thinning (Non-Maximum Suppression):
+- Objective: To enhance the detected edges to a singular pixel width.
+- Options: By evaluating the gradient magnitude of a pixel in relation to its neighboring pixels, those that do not represent local maxima in the gradient direction are eliminated.
+
+4. Thresholding:
+- Objective: To distinguish between genuine edges and noise artifacts.
+- Options: Hysteresis thresholding and binary thresholding.
+
+5. Edge Linking:
+- Objective: To unify disjointed edge segments.
+- Options: Hough transform, gradient direction analysis, and region growing.
+
+## Our Approach
+We will make use of a Genetic Algorithm to help find and build an optimal pipeline.
+
+### Chromosome Representation
+- Each chromosome will represent a pipeline configuration.
+- The genes of each chromosome will comprise of the unique parameters required for the different components of edge detection (see above Pipeline Framework)
+
+### Initial Population Generation
+Our algorithm will start by randomly generating unique configurations.
+The are the following options for each Gene:
+- Gene 1 (Noise reduction):
+  - method: 'gaussian', 'median', 'bilateral'
+  - params:
+      - ksize: (3, 3), (5, 5)
+      - sigma: random.uniform(0.5, 2.0)
+- Gene 2 (Gradient):
+  - method: 'sobel', 'prewitt', 'laplacian'
+  - params:
+    - ksize: 3, 5
+- Gene 3 (Thinning):
+  - method: True or False
+- Gene 4 (Thresholding):
+  - method: 'binary' or 'hysteresis'
+  - params:
+    - low: random integer in range 30-100
+    - high: random integer in range 150-255
+- Gene 5 (Linking):
+  - method: 'hough', ;region_growing'
+  - params:
+    - threshold: random integer in range 50-150
+
+*Example Representation*:
+```
+chromosome = {
+            'noise_reduction': {
+              'method': 'gaussian',
+              'params': {
+                'ksize': (3, 3),
+                'sigma': random.uniform(0.5, 2.0)
+              },
+            },
+            'gradient': {
+              'method': 'laplacian',
+              'params': {
+                'ksize': 5
+              },
+            },
+            'thinning': True,
+            'thresholding': {
+              'method': 'hysteresis',
+              'params': {
+                'low': 35,
+                'high': 200
+              },
+            },
+            'linking': {
+              'method': 'hough',
+              'params': {
+                'threshold': 75
+              }
+            }
+        }
+```
+### Genetic Operators
+We will make use of the two common operators: Crossover and Mutation
+- Crossover:
+  This will involve swapping the genes between two parents to create two offsprings
+- Mutation:
+  This will involve make some random change to a randomly selected gene
+
+### Selection:
+We will use Tournament Selection to select two best parents from a tournament pool.
+
+### Fitness Function:
+Our fitness function will simply calculate how well a pipeline performs on an image. We can use metrics like:
+- feature descriptor (ORB/SIFT)
+- mean-square-error(MSE)
+- peak-signal-noise-ratio
+- structural-similarity
+
+### GA parameters:
+- population size
+- generations
+- crossover rate
+- mutation rate
+- tournament size
